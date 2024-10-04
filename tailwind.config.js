@@ -7,6 +7,14 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('daisyui'),],
+  daisyui: {
+    themes: [      {
+      light: {
+        ...require("daisyui/src/theming/themes")["light"],
+        accent: "#639962",
+        neutral: "#404f40"
+      },
+    },],
+  },
 }
-
