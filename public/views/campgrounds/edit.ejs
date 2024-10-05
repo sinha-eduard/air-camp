@@ -1,27 +1,69 @@
 <% layout('./layouts/boilerplate') %>
-<h1>Edit Campground</h1>
-<form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST">
-  <div>
-    <label for="title">Title</label>
-    <input
-      type="text"
-      name="campground[title]"
-      id="title"
-      value="<%=campground.title%>"
-    />
-  </div>
-  <div>
-    <label for="location">Location</label>
-    <input
-      type="text"
-      name="campground[location]"
-      id="location"
-      value="<%=campground.location%>"
-    />
-  </div>
-  <button>Edit Campground</button>
-</form>
 
-<footer>
-  <a href="/campgrounds">Back to All</a>
-</footer>
+<section id="new-camp" class="flex justify-center mb-6">
+  <div class="card bg-base-100 w-1/2 shadow-xl portrait:w-11/12">
+    <div class="card-body items-center text-center gap-6">
+      <h2 class="card-title">Edit Campground</h2>
+      <form action="/campgrounds" method="POST" class="w-full">
+        <div>
+          <input
+            type="text"
+            placeholder="Title"
+            class="mb-4 input input-accent input-bordered w-full max-w-xs"
+            name="campground[title]"
+            id="title"
+            value="<%=campground.title%>"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Location"
+            class="mb-4 input input-accent input-bordered w-full max-w-xs"
+            name="campground[location]"
+            id="location"
+            value="<%=campground.location%>"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Image URL"
+            class="mb-4 input input-accent input-bordered w-full max-w-xs"
+            name="campground[image]"
+            id="image"
+            value="<%=campground.image%>"
+          />
+        </div>
+        <div class="ml-2 ">
+          <p class="inline text-xl text-accent">$</p>
+          <input
+            type="number"
+            placeholder="0.00"
+            class="mb-4 input input-accent input-bordered w-[52%] portrait:w-[94%] max-w-xs"
+            name="campground[price]"
+            id="price"
+            value="<%=campground.price%>"
+            required
+          />
+        </div>
+        <div>
+          <textarea
+            placeholder="Description"
+            class="mb-4 textarea textarea-accent w-[56%] portrait:w-full"
+            name="campground[description]"
+            id="description"
+            required
+          ><%=campground.description%></textarea>
+        </div>
+        <button class="btn btn-accent text-white">Edit Campground</button>
+      </form>
+
+      <footer>
+        <a class="link link-accent" href="/campgrounds">Back to All</a>
+      </footer>
+    </div>
+  </div>
+</section>

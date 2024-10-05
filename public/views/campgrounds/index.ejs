@@ -14,6 +14,7 @@
         </figure>
         <div class="card-body">
           <h2 class="card-title portrait:text-base"><%= campground.title %></h2>
+          <p class="text-base portrait:text-xs"><%= campground.location %></p>
           <p class="portrait:hidden"><%= campground.description %></p>
           <div class="card-actions justify-end">
             <a class="btn btn-accent portrait:btn-md text-white" href="/campgrounds/<%= campground._id%>">Reserve Now</a>
