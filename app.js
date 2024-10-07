@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Campground = require("./models/campground");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const Joi = require("joi");
+const {campgroundSchema} = require("./joiSchema");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 mongoose.connect("mongodb://localhost:27017/air-camp");
@@ -22,6 +22,18 @@ app.set("views", "./public/views");
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+const validateCampground = (req, res, next) =>{
+  const {error } = campgroundSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map(el => el.message).join(",")
+    throw new ExpressError(msg, 400);
+  } else {
+    next()
+  }
+
+}
+
 
 app.get("/", (req, res) => {
   res.redirect("/campgrounds");
@@ -43,24 +55,8 @@ app.get(
 );
 
 app.post(
-  "/campgrounds",
+  "/campgrounds", validateCampground,
   catchAsync(async (req, res, next) => {
-    const campgroundSchema = Joi.object({
-      campground: Joi.object({
-        title: Joi.string().required(),
-        price: Joi.number().required().min(0),
-        image: Joi.string().required(),
-        location: Joi.string().required(),
-        description: Joi.string().required(),
-      }).required(),
-    });
-    
-    const {error } = campgroundSchema.validate(req.body);
-    if (error) {
-      const msg = error.details.map(el => el.message).join(",")
-      throw new ExpressError(msg, 400);
-    }
-
     const camp = new Campground(req.body.campground);
     await camp.save();
     res.redirect(`/campgrounds/${camp._id}`);
@@ -84,7 +80,7 @@ app.get(
 );
 
 app.put(
-  "/campgrounds/:id",
+  "/campgrounds/:id", validateCampground,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const camp = await Campground.findByIdAndUpdate(id, {
