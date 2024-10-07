@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Campground = require("./models/campground");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const {campgroundSchema} = require("./joiSchema");
+const { campgroundSchema } = require("./joiSchema");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 mongoose.connect("mongodb://localhost:27017/air-camp");
@@ -23,17 +23,15 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-const validateCampground = (req, res, next) =>{
-  const {error } = campgroundSchema.validate(req.body);
+const validateCampground = (req, res, next) => {
+  const { error } = campgroundSchema.validate(req.body);
   if (error) {
-    const msg = error.details.map(el => el.message).join(",")
+    const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
   } else {
-    next()
+    next();
   }
-
-}
-
+};
 
 app.get("/", (req, res) => {
   res.redirect("/campgrounds");
@@ -55,7 +53,8 @@ app.get(
 );
 
 app.post(
-  "/campgrounds", validateCampground,
+  "/campgrounds",
+  validateCampground,
   catchAsync(async (req, res, next) => {
     const camp = new Campground(req.body.campground);
     await camp.save();
@@ -80,7 +79,8 @@ app.get(
 );
 
 app.put(
-  "/campgrounds/:id", validateCampground,
+  "/campgrounds/:id",
+  validateCampground,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const camp = await Campground.findByIdAndUpdate(id, {
