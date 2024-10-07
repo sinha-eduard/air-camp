@@ -4,7 +4,11 @@
   <div class="card bg-base-100 w-1/2 shadow-xl portrait:w-11/12">
     <div class="card-body items-center text-center gap-6">
       <h2 class="card-title">Edit Campground</h2>
-      <form action="/campgrounds" method="POST" class="w-full">
+      <form action="/campgrounds" method="POST" class="w-full group" 
+      onkeydown="if(event.keyCode === 13) { 
+        return false;
+      }"
+      novalidate>
         <div>
           <input
             type="text"
@@ -35,6 +39,7 @@
             name="campground[image]"
             id="image"
             value="<%=campground.image%>"
+            required
           />
         </div>
         <div>
@@ -57,7 +62,7 @@
             required
           ><%=campground.description%></textarea>
         </div>
-        <button class="btn btn-accent text-white">Edit Campground</button>
+        <button class="btn btn-accent text-white group-invalid:pointer-events-none group-invalid:opacity-30"">Edit Campground</button>
       </form>
 
       <footer>

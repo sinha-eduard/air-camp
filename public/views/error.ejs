@@ -1,0 +1,9 @@
+<% layout('./layouts/boilerplate') %>
+<section class="flex justify-center">
+  <div class="card bg-base-100 shadow-xl w-1/2 portrait:w-11/12">
+    <div class="card-body">
+        <h1 class="card-title"><%=err.message %></h1>
+        <p><%= err.stack  %></p>
+    </div>
+  </div>
+</section>

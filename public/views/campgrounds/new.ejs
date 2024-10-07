@@ -4,12 +4,16 @@
   <div class="card bg-base-100 w-1/2 shadow-xl portrait:w-11/12">
     <div class="card-body items-center text-center gap-6">
       <h2 class="card-title">Add Campground</h2>
-      <form action="/campgrounds" method="POST" class="w-full">
+      <form action="/campgrounds" method="POST" class="w-full group" 
+        onkeydown="if(event.keyCode === 13) { 
+          return false;
+        }"
+        novalidate>
         <div>
           <input
             type="text"
             placeholder="Title"
-            class="mb-4 input input-accent input-bordered w-full max-w-xs"
+            class="mb-4 input input-accent input-bordered w-full max-w-xs "
             name="campground[title]"
             id="title"
             required
@@ -32,6 +36,7 @@
             class="mb-4 input input-accent input-bordered w-full max-w-xs"
             name="campground[image]"
             id="image"
+            required
           />
         </div>
         <div>
@@ -53,7 +58,7 @@
             required
           ></textarea>
         </div>
-        <button class="btn btn-accent text-white">Add Campground</button>
+        <button class="btn btn-accent text-white group-invalid:pointer-events-none group-invalid:opacity-30">Add Campground</button>
       </form>
 
       <footer>
