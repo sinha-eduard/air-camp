@@ -1,6 +1,9 @@
 <% layout('./layouts/boilerplate') %>
 
-<section id="show page" class="mt-8 w-full flex flex-row flex-wrap justify-center gap-6 mb-8">
+<section
+  id="show page"
+  class="mt-8 w-full flex flex-row flex-wrap justify-center gap-6 mb-8"
+>
   <div class="w-2/5 portrait:w-11/12">
     <img
       class="mask mask-squircle"
@@ -11,7 +14,7 @@
   </div>
 
   <div class="w-2/5 portrait:w-11/12">
-    <div class="card bg-base-100  shadow-xl">
+    <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <h1 class="mb-0 card-title"><%= campground.title %></h1>
         <h2 class="mt-0"><%= campground.location %></h2>
@@ -19,18 +22,123 @@
         <p><%= campground.description %></p>
 
         <div class="flex gap-4">
-        <a class="btn btn-accent " href="/campgrounds/<%=campground._id%>/edit">Edit</a>
-        <form class="inline"
-          action="/campgrounds/<%= campground._id%>?_method=DELETE"
-          method="POST"
-        >
-          <button class="btn btn-error">Delete</button>
-        </form>
-      </div>
+          <a
+            class="btn btn-accent text-white"
+            href="/campgrounds/<%=campground._id%>/edit"
+            >Edit</a
+          >
+          <form
+            class="inline"
+            action="/campgrounds/<%= campground._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-error text-white">Delete</button>
+          </form>
+        </div>
         <footer>
           <a class="link link-accent" href="/campgrounds">Back to All</a>
         </footer>
       </div>
     </div>
   </div>
+</section>
+
+<section id="write-review" class="flex justify-center mb-8">
+  <div class="w-3/5 portrait:w-11/12">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Leave a Review</h2>
+        <form action="/campgrounds/<%=campground._id%>/reviews" method="post">
+          <h2 class="mt-2">Rating</h2>
+          <div>
+            <div class="rating">
+              <input
+                type="radio"
+                name="review[rating]"
+                value="1"
+                class="mask mask-star-2 bg-accent"
+              />
+              <input
+                type="radio"
+                name="review[rating]"
+                value="2"
+                class="mask mask-star-2 bg-accent"
+                checked="checked"
+              />
+              <input
+                type="radio"
+                name="review[rating]"
+                value="3"
+                class="mask mask-star-2 bg-accent"
+              />
+              <input
+                type="radio"
+                name="review[rating]"
+                value="4"
+                class="mask mask-star-2 bg-accent"
+              />
+              <input
+                type="radio"
+                name="review[rating]"
+                value="5"
+                class="mask mask-star-2 bg-accent"
+              />
+            </div>
+          </div>
+          <div>
+            <label for="body" class="mt-2">Review</label>
+            <textarea
+              name="review[body]"
+              id="body"
+              class="w-full textarea textarea-accent"
+              placeholder="Write a review"
+            ></textarea>
+          </div>
+          <button class="btn btn-accent text-white mt-2">Sumbit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="flex flex-col items-center mb-8 ">
+  <% for(let review of campground.reviews) {%>
+  <div class="w-3/5 portrait:w-11/12 mb-2">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <p>UserName</p>
+        <form action="">
+          <div class="rating">
+            <% for(i = 1; i <= 5; i++){ %> <% if(i === review.rating){ %>
+            <input
+              type="radio"
+              name="review"
+              class="mask mask-star-2 bg-accent"
+              checked="checked"
+              disabled
+            />
+            <% } else {%>
+            <input
+              type="radio"
+              name="review"
+              class="mask mask-star-2 bg-accent"
+              disabled
+            />
+            <% } %> <% } %>
+          </div>
+        </form>
+        <div class="flex flex-row justify-between">
+        <p><%= review.body %></p>
+        <form
+            class="inline"
+            action="/campgrounds/<%= campground._id%>/reviews/<%=review._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button class="link link-error">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
 </section>

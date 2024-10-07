@@ -13,7 +13,8 @@ module.exports = {
       light: {
         ...require("daisyui/src/theming/themes")["light"],
         accent: "#639962",
-        neutral: "#404f40"
+        neutral: "#404f40",
+        secondary: "#f6d860"
       },
     },],
   },
