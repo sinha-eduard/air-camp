@@ -4,7 +4,7 @@
   <div class="card bg-base-100 w-1/2 shadow-xl portrait:w-11/12">
     <div class="card-body items-center text-center gap-6">
       <h2 class="card-title">Edit Campground</h2>
-      <form action="/campgrounds" method="POST" class="w-full group" 
+      <form action="/campgrounds/<%=campground._id %>?_method=PUT" method="POST" class="w-full group" 
       onkeydown="if(event.keyCode === 13) { 
         return false;
       }"
