@@ -31,5 +31,11 @@
     <a class="btn btn-ghost text-xl rounded-full" href="/campgrounds/new">new campground</a>
   </div>
   <div class="navbar-end">
+    <% if(!currentUser) {%>
+    <a class="btn btn-ghost portrait:text-base text-xl rounded-full " href="/login">login</a>
+    <a class="btn btn-ghost portrait:text-base text-xl rounded-full" href="/register">register</a>
+    <% } else { %>
+    <a class="btn btn-ghost portrait:text-base text-xl rounded-full" href="/logout">logout</a>
+    <% } %>
   </div>
 </div>

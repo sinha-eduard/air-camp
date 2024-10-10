@@ -2087,12 +2087,24 @@ html {
   margin-top: auto;
 }
 
+.mr-0 {
+  margin-right: 0px;
+}
+
+.ml-0 {
+  margin-left: 0px;
+}
+
 .inline {
   display: inline;
 }
 
 .flex {
   display: flex;
+}
+
+.h-4 {
+  height: 1rem;
 }
 
 .h-5 {
@@ -2121,6 +2133,10 @@ html {
 
 .w-3\/5 {
   width: 60%;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .w-44 {
@@ -2157,6 +2173,10 @@ html {
 
 .shrink-0 {
   flex-shrink: 0;
+}
+
+.grow {
+  flex-grow: 1;
 }
 
 .flex-row {
@@ -2197,6 +2217,14 @@ html {
 
 .gap-6 {
   gap: 1.5rem;
+}
+
+.gap-0 {
+  gap: 0px;
+}
+
+.justify-self-center {
+  justify-self: center;
 }
 
 .rounded-box {
@@ -2270,6 +2298,10 @@ html {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.opacity-70 {
+  opacity: 0.7;
 }
 
 .shadow {
