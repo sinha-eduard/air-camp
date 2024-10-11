@@ -3,6 +3,7 @@ const Campground = require("../models/campground");
 const Users = require("../models/user");
 const cities = require("./cities");
 const {places, descriptors} = require("./seedHelpers")
+mongoose.connect("mongodb+srv://vercel-airCamp-admin-user:KhtDdqHOKuFSAMNH@store.hzgmd.mongodb.net/airCamp?retryWrites=true&w=majority&appName=store")
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
