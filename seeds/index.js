@@ -1,11 +1,8 @@
 const mongoose = require("mongoose");
 const Campground = require("../models/campground");
+const Users = require("../models/user");
 const cities = require("./cities");
 const {places, descriptors} = require("./seedHelpers")
-
-const uri = process.env.MONGODB_URI;
-
-mongoose.connect(uri)
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -16,12 +13,14 @@ db.once("open", () => {
 const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
+    const user = new Users({ email: "test@test.test", username: "airCamp" });
+    const registeredUser = await Users.register(user, "password");
     await Campground.deleteMany({});
     for (let i = 0; i < 50; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 30) + 10
         const camp = new Campground({
-            author: "67092bd40b60bc1606f3132f",
+            author: registeredUser._id,
             title: `${sample(descriptors)} ${sample(places)}`,
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             image: `https://picsum.photos/400?random=${Math.random()}`,
