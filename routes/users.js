@@ -7,21 +7,15 @@ const {
   getLogin,
   postLogin,
   getLogout,
-  passportAuth
+  passportAuth,
 } = require("../controllers/users");
 
-router.get("/register", registerForm);
+router.route("/register").get(registerForm).post(catchAsync(postNewRegister));
 
-router.post("/register", catchAsync(postNewRegister));
-
-router.get("/login", getLogin);
-
-router.post(
-  "/login",
-  storeReturnTo,
-  passportAuth,
-  postLogin
-);
+router
+  .route("/login")
+  .get(getLogin)
+  .post(storeReturnTo, passportAuth, postLogin);
 
 router.get("/logout", getLogout);
 
