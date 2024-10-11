@@ -2,22 +2,23 @@
 <h1 class="text-3xl text-center mb-4">All Campgrounds</h1>
 
 <section id="all-display" class="mb-8">
-  <ul class=" flex flex-wrap flex-row justify-evenly gap-6 portrait:gap-0">
+  <ul class="flex flex-wrap flex-row justify-evenly gap-6 portrait:gap-0">
     <% for(let campground of campgrounds) {%>
     <li>
       <div class="card bg-base-100 w-96 portrait:w-44 shadow-xl portrait:mb-2">
         <figure>
-          <img
-            src="<%= campground.image  %>"
-            alt=""
-          />
+          <img src="<%= campground.image  %>" alt="" />
         </figure>
         <div class="card-body">
           <h2 class="card-title portrait:text-base"><%= campground.title %></h2>
           <p class="text-base portrait:text-xs"><%= campground.location %></p>
           <p class="portrait:hidden"><%= campground.description %></p>
           <div class="card-actions justify-end">
-            <a class="btn btn-accent portrait:btn-md text-white" href="/campgrounds/<%= campground._id%>">Reserve Now</a>
+            <a
+              class="btn btn-accent portrait:btn-md text-white"
+              href="/campgrounds/<%= campground._id%>"
+              >View Camp</a
+            >
           </div>
         </div>
       </div>

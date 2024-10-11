@@ -16,11 +16,14 @@
   <div class="w-2/5 portrait:w-11/12">
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
-        <h1 class="mb-0 card-title"><%= campground.title %></h1>
+        <div class="flex justify-between w-full">
+          <h1 class="mb-0 card-title"><%= campground.title %></h1>
+          <p class="text-right"><%= campground.author.username %></p>
+        </div>
         <h2 class="mt-0"><%= campground.location %></h2>
         <p>$<%= campground.price %>/night</p>
         <p><%= campground.description %></p>
-
+        <% if(currentUser && campground.author.equals(currentUser.id)){%>
         <div class="flex gap-4">
           <a
             class="btn btn-accent text-white"
@@ -35,6 +38,7 @@
             <button class="btn btn-error text-white">Delete</button>
           </form>
         </div>
+        <% } %>
         <footer>
           <a class="link link-accent" href="/campgrounds">Back to All</a>
         </footer>
@@ -101,7 +105,7 @@
   </div>
 </section>
 
-<section id="reviews" class="flex flex-col items-center mb-8 ">
+<section id="reviews" class="flex flex-col items-center mb-8">
   <% for(let review of campground.reviews) {%>
   <div class="w-3/5 portrait:w-11/12 mb-2">
     <div class="card bg-base-100 shadow-xl">
@@ -128,8 +132,8 @@
           </div>
         </form>
         <div class="flex flex-row justify-between">
-        <p><%= review.body %></p>
-        <form
+          <p><%= review.body %></p>
+          <form
             class="inline"
             action="/campgrounds/<%= campground._id%>/reviews/<%=review._id%>?_method=DELETE"
             method="POST"

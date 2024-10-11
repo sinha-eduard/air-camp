@@ -2087,14 +2087,6 @@ html {
   margin-top: auto;
 }
 
-.mr-0 {
-  margin-right: 0px;
-}
-
-.ml-0 {
-  margin-left: 0px;
-}
-
 .inline {
   display: inline;
 }
@@ -2219,14 +2211,6 @@ html {
   gap: 1.5rem;
 }
 
-.gap-0 {
-  gap: 0px;
-}
-
-.justify-self-center {
-  justify-self: center;
-}
-
 .rounded-box {
   border-radius: var(--rounded-box, 1rem);
 }
@@ -2266,6 +2250,10 @@ html {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -2298,6 +2286,11 @@ html {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-base-300 {
+  --tw-text-opacity: 1;
+  color: var(--fallback-b3,oklch(var(--b3)/var(--tw-text-opacity)));
 }
 
 .opacity-70 {
