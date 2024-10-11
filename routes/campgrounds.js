@@ -3,7 +3,6 @@ const catchAsync = require("../utils/catchAsync");
 const Campground = require("../models/campground");
 const { isLoggedIn, isAuthor, validateCampground } = require("../middleware");
 
-
 router.get(
   "/",
   catchAsync(async (req, res) => {
@@ -33,7 +32,7 @@ router.get(
   "/:id",
   catchAsync(async (req, res, next) => {
     const campground = await Campground.findById(req.params.id)
-      .populate("reviews")
+      .populate({ path: "reviews", populate: { path: "author" } })
       .populate("author");
     if (!campground) {
       req.flash("error", "Could Not Find Campground");

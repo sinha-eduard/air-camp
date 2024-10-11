@@ -47,6 +47,7 @@
   </div>
 </section>
 
+<% if(currentUser) {%>
 <section id="write-review" class="flex justify-center mb-8">
   <div class="w-3/5 portrait:w-11/12">
     <div class="card bg-base-100 shadow-xl">
@@ -104,13 +105,18 @@
     </div>
   </div>
 </section>
+<%} else {%>
+<section class="flex justify-center mb-8">
+  <h2 class="card-title">Login to Leave a Review</h2>
+</section>
+<% } %>
 
 <section id="reviews" class="flex flex-col items-center mb-8">
   <% for(let review of campground.reviews) {%>
   <div class="w-3/5 portrait:w-11/12 mb-2">
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
-        <p>UserName</p>
+        <p class="font-bold"><%= review.author.username %></p>
         <form action="">
           <div class="rating">
             <% for(i = 1; i <= 5; i++){ %> <% if(i === review.rating){ %>
@@ -133,6 +139,7 @@
         </form>
         <div class="flex flex-row justify-between">
           <p><%= review.body %></p>
+          <% if(currentUser && review.author.equals(currentUser.id)){%>
           <form
             class="inline"
             action="/campgrounds/<%= campground._id%>/reviews/<%=review._id%>?_method=DELETE"
@@ -140,6 +147,7 @@
           >
             <button class="link link-error">Delete</button>
           </form>
+          <% } %>
         </div>
       </div>
     </div>
