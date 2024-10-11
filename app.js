@@ -34,8 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(helmet({contentSecurityPolicy:false}))
 
-const store = new MongoDBStore({
-  url:process.env.MONGODB_URI,
+const store = new MongoDBStore.create({
+  url: process.env.MONGODB_URI,
   secret: process.env.SECRET_STORE,
   touchAfter: 24 * 60 * 60
 })
