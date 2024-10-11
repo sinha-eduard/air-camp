@@ -15,7 +15,10 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 
-mongoose.connect("mongodb://localhost:27017/air-camp");
+const uri = process.env.MONGODB_URI;
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+mongoose.connect(uri, clientOptions);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {

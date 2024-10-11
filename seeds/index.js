@@ -3,7 +3,9 @@ const Campground = require("../models/campground");
 const cities = require("./cities");
 const {places, descriptors} = require("./seedHelpers")
 
-mongoose.connect('mongodb://localhost:27017/air-camp')
+const uri = process.env.MONGODB_URI;
+
+mongoose.connect(uri)
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));

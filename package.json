@@ -20,7 +20,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"nodemon app.js\" \"npx tailwindcss -i ./public/css/styles.css -o ./public/css/output.css -w\""
+    "dev": "concurrently \"nodemon app.js\" \"npx tailwindcss -i ./public/css/styles.css -o ./public/css/output.css -w\"",
+    "vercel-build" : "echo hello"
   },
   "author": "Eduard Sinha",
   "license": "ISC",
