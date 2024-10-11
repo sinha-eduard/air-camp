@@ -1,11 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
-</html>
+<% layout('./layouts/boilerplate') %>
+
+<section id="welcome" class="flex justify-center h-11/12">
+  <div class="card bg-base-100 image-full w-full portrait:w-11/12 shadow-xl">
+    <figure>
+      <img
+        src="https://picsum.photos/400?random=<%=Math.random()%>"
+        alt="camp"
+      />
+    </figure>
+    <div class="card-body">
+      <% if(!currentUser){ %>
+      <h2 class="card-title text-2xl">welcome to airCamp</h2>
+      <% } else { %>
+      <h2 class="card-title text-2xl">
+        welcome to airCamp, <%= currentUser.username %>
+      </h2>
+      <% } %>
+      <p class="text">Find the perfect campgrounds for your upcoming trip</p>
+      <div class="card-actions justify-end">
+        <a href="/campgrounds" class="btn btn-accent text-white">Campgrounds</a>
+      </div>
+    </div>
+  </div>
+</section>

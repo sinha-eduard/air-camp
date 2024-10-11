@@ -38,7 +38,7 @@ const getLogout = (req, res, next) => {
       return next(err);
     }
     req.flash("success", "Logged Out");
-    res.redirect("/campgrounds");
+    res.redirect("/home");
   });
 };
 
