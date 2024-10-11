@@ -9,6 +9,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
+const helmet = require("helmet")
 
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
@@ -27,13 +28,16 @@ app.set("views", "./public/views");
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(helmet({contentSecurityPolicy:false}))
 
 const sessionConfig = {
+  name: "session",
   secret: "pass",
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    //secure: true,
     expires: Date.now() + 604800000,
     maxAge: 604800000,
   },
@@ -54,8 +58,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   next();
 });
-
-
 
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/reviews", reviewRoutes);

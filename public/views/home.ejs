@@ -1,25 +1,59 @@
-<% layout('./layouts/boilerplate') %>
-
-<section id="welcome" class="flex justify-center h-11/12">
-  <div class="card bg-base-100 image-full w-full portrait:w-11/12 shadow-xl">
-    <figure>
-      <img
-        src="https://picsum.photos/400?random=<%=Math.random()%>"
-        alt="camp"
-      />
-    </figure>
-    <div class="card-body">
-      <% if(!currentUser){ %>
-      <h2 class="card-title text-2xl">welcome to airCamp</h2>
-      <% } else { %>
-      <h2 class="card-title text-2xl">
-        welcome to airCamp, <%= currentUser.username %>
-      </h2>
-      <% } %>
-      <p class="text">Find the perfect campgrounds for your upcoming trip</p>
-      <div class="card-actions justify-end">
-        <a href="/campgrounds" class="btn btn-accent text-white">Campgrounds</a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>airCamp</title>
+    <link rel="stylesheet" href="../../css/output.css">
+  </head>
+  <body class="flex flex-col items-center flex-1 h-screen">
+    <div class="navbar bg-base-100 shadow mt-6 rounded-full w-2/3 portrait:w-11/12 mb-4">
+        <div class="navbar-start">
+          <a class="text-xl font-bold text-accent ml-4">airCamp</a>
+        </div>
+        <div class="navbar-center portrait:hidden">
+          <a class="btn btn-ghost text-xl rounded-full" href="/home">home</a>
+          <a class="btn btn-ghost text-xl rounded-full" href="/campgrounds">campgrounds</a>
+          <a class="btn btn-ghost text-xl rounded-full" href="/campgrounds/new">new campground</a>
+        </div>
+        <div class="navbar-end">
+          <% if(!currentUser) {%>
+          <a class="btn btn-ghost portrait:text-base text-xl rounded-full " href="/login">login</a>
+          <a class="btn btn-ghost portrait:text-base text-xl rounded-full" href="/register">register</a>
+          <% } else { %>
+          <a class="btn btn-ghost portrait:text-base text-xl rounded-full" href="/logout">logout</a>
+          <% } %>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+      
+    <main class="w-2/3 portrait:w-full">
+      <%- include("./partials/flash")  %>
+      <section id="welcome" class="flex justify-center h-11/12 mt-8">
+        <div class="card bg-base-100 image-full w-full portrait:w-11/12 shadow-xl">
+          <figure>
+            <img
+              src="https://picsum.photos/400?random=<%=Math.random()%>"
+              alt="camp"
+            />
+          </figure>
+          <div class="card-body">
+            <% if(!currentUser){ %>
+            <h2 class="card-title text-2xl">welcome to airCamp</h2>
+            <% } else { %>
+            <h2 class="card-title text-2xl">
+              welcome to airCamp, <%= currentUser.username %>
+            </h2>
+            <% } %>
+            <p class="text">Find the perfect campgrounds for your upcoming trip</p>
+            <div class="card-actions justify-end">
+              <a href="/campgrounds" class="btn btn-accent text-white">Campgrounds</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <%- include("./partials/footer")  %>
+  </body>
+</html>
+
+
