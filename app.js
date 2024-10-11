@@ -10,7 +10,7 @@ const LocalStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 const helmet = require("helmet");
-const MongoDBStore = require("connect-mongo")(session)
+const MongoStore = require("connect-mongo")
 
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
@@ -34,8 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(helmet({contentSecurityPolicy:false}))
 
-const store = new MongoDBStore.create({
-  url: process.env.MONGODB_URI,
+const store = new MongoStore({
+  mongoUrl: process.env.MONGODB_URI,
   secret: process.env.SECRET_STORE,
   touchAfter: 24 * 60 * 60
 })
